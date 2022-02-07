@@ -21,4 +21,4 @@ elif inddf['Date'].iloc[-1] != ldata['Date']:
     dframe.to_csv('data/owid-covid-data.csv')
 
 
-
+print(dframe)
