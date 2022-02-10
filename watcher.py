@@ -12,7 +12,19 @@ import sklearn
 import http
 
 ### Starting ###
-dframe= pd.read_csv('data/owid-covid-data.csv')
-ldata = pd.read_csv('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv')
-# ldata = pd.save('https://github.com/owid/covid-19-data/blob/master/public/data/latest/owid-covid-latest.csv',on_bad_lines='skip')
-print(ldata)
+dframe= pd.read_csv('data/data.csv')
+lframe = pd.read_csv('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/latest/owid-covid-latest.csv')
+colu = pd.read_csv('https://raw.githubusercontent.com/owid/covid-19-data/master/public/data/owid-covid-codebook.csv')
+colu = colu['column'].values.tolist()
+print(colu)
+inddframe = dframe[dframe['iso_code']=='IND']
+indlframe = lframe[lframe['iso_code']=='IND']
+
+if str(inddframe['date'].iloc[-1]) != str(indlframe['last_updated_date'].iloc[0]) :
+    indlframe = indlframe.values.tolist()
+    inddframe = inddframe.append(pd.DataFrame(indlframe,columns=colu))
+    print(inddframe)
+    inddframe.to_csv('data/data.csv')
+
+    
+
