@@ -1,3 +1,4 @@
+from hashlib import new
 from numpy import cov
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -36,11 +37,10 @@ class dataframes():
     
 
     new = pd.merge(covidstat(),vaccstat(),on='date',how='left')
-    new = new[['date','total_cases','people_vaccinated']]
     new.to_csv('data/new.csv')
     print(new)
 
-fig = px.line(dataframes.new,x='date',y=dataframes.new.columns[1:2],title='Covid Cases with the span of time')
+fig = px.scatter(dataframes.new,x='date',y=['new_cases','new_deaths'],title='Covid Cases with the span of time')
 fig.show()
 
 
