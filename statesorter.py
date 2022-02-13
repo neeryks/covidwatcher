@@ -18,7 +18,7 @@ for i in li :
     collist1 = data.columns.tolist()
     print(collist1)
     if collist1[2] == 'Province_State':
-        data = data[['Province_State','Country_Region','Last_Update','Confirmed','Deaths','Recovered']]
+        data = data[['Province_State','Country_Region','Last_Update','Confirmed','Deaths','Recovered','Active']]
     elif collist1[0] == 'Province/State':
         data = data[['Province/State','Country/Region',"Last Update",'Confirmed','Deaths','Recovered']]
         data = data.rename(columns={'Province/State':'Province_State','Country/Region':'Country_Region',"Last Update":'Last_Update',})
@@ -33,7 +33,7 @@ for i in li :
 for state in statelistname:
     statedata = adata[adata['Province_State']==state]
     statedata = statedata.sort_values(by='Last_Update')
-    statedata.to_csv('data/statedata/{}.csv'.format(state))
+    statedata.to_csv('data/statedata/{}.csv'.format(state),index=False)
 
 
 
