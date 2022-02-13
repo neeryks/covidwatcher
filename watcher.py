@@ -1,9 +1,10 @@
 
+from matplotlib import animation
 from matplotlib.pyplot import title
 import pandas as pd
 #from matplotlib import pyplot as plt
 #import seaborn as sns
-#import plotly.express as px
+import plotly.express as px
 from plotly import graph_objects as go
 from plotly.subplots import make_subplots as ms
 
@@ -43,7 +44,7 @@ class dataframes():
 
 fig = ms(rows=3,cols=2,start_cell='bottom-left',subplot_titles=("People Vaccinated agaist Covid19","Every day Covid19 Cases","Deaths Every day Due to Covid19"
 ,"Total Deaths Covid19","Total Cases"))
-fig.add_trace(go.Scatter(x=dataframes.new['date'],y=dataframes.new['people_vaccinated']),row=1,col=1)
+fig.add_trace(go.Scatter(x=dataframes.new['date'],y=dataframes.new['people_vaccinated'],),row=1,col=1)
 fig.add_trace(go.Scatter(x=dataframes.new['date'],y=dataframes.new['new_cases']),row=1,col=2)
 fig.add_trace(go.Scatter(x=dataframes.new['date'],y=dataframes.new['new_deaths']),row=2,col=1)
 fig.add_trace(go.Scatter(x=dataframes.new['date'],y=dataframes.new['total_deaths']),row=2,col=2)
@@ -51,6 +52,7 @@ fig.add_trace(go.Scatter(x=dataframes.new['date'],y=dataframes.new['total_cases'
 
 fig.update_layout(title_text="Covid19 Related Data INDIA")
 fig.show()
+
 
 
     
