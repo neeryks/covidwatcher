@@ -1,12 +1,12 @@
 
-from matplotlib import animation
-from matplotlib.pyplot import title
+
 import pandas as pd
 #from matplotlib import pyplot as plt
 #import seaborn as sns
 import plotly.express as px
 from plotly import graph_objects as go
 from plotly.subplots import make_subplots as ms
+import statesorter
 
 
 ### Starting ###
@@ -53,6 +53,9 @@ fig.add_trace(go.Scatter(x=dataframes.new['date'],y=dataframes.new['total_cases'
 fig.update_layout(title_text="Covid19 Related Data INDIA")
 fig.show()
 
+full = pd.read_csv("data/statedata/full.csv")
 
+fig1 = px.choropleth(full,geojson='data/states_india.geojson',locations=full['state_code'],color=full['Active'],animation_frame=full['Last_Update'])
+fig1.show()
 
     
