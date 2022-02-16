@@ -36,7 +36,26 @@ def swsorter(li):
             #print(statelist.head(20))
             statelistname = statelist['Province_State'].tolist()
             #print(statelistname)
-
+    ################### Adding New Deaths & Cases Column ################
+    newcases = fulllist['Confirmed'].tolist() 
+    newcases1 = fulllist["Confirmed"].tolist()
+    newcases1.insert(0,0)
+    newdeath = fulllist['Deaths'].tolist()
+    newdeath1 = fulllist['Deaths'].tolist()
+    newdeath1.insert(0,0)
+    new_cases = []
+    new_deaths =[]
+    zip1 = zip(newcases1,newcases)
+    zip2 = zip(newdeath1,newdeath)
+    for zi1_1,zi1_2 in zip1:
+        new_cases.append(zi1_1 - zi1_2)
+    for zi2_1,zi2_2 in zip2:
+        new_deaths.append(zi2_1-zi2_2)
+    
+    ###Adding to Dataframe ###########
+    fulllist['New Cases'] = new_cases
+    fulllist["New Deaths"] = new_deaths
+    ##################################
     for state in statelistname:
         statedata = fulllist[fulllist['Province_State']==state]
         statedata = statedata.sort_values(by='Last_Update')
@@ -50,14 +69,14 @@ def flsorter():
     'Gujarat', 'Haryana', 'Himachal Pradesh', 'Jammu and Kashmir', 'Jharkhand', 'Karnataka', 'Kerala', 'Ladakh', 'Lakshadweep', 
     'Madhya Pradesh', 'Maharashtra', 'Manipur', 'Meghalaya', 'Mizoram', 'Nagaland', 'Odisha', 'Puducherry', 'Punjab', 
     'Rajasthan', 'Sikkim', 'Tamil Nadu', 'Telangana', 'Tripura', 'Unknown', 'Uttar Pradesh', 'Uttarakhand', 'West Bengal'],
-    'state_code':[35,37,12,18,10,22,4,22,26,7,30,24,6,2,1,20,29,32,38,31,23,27,14,17,15,13,21,34,3,8,11,36,16,97,9,5,19]}
+    'state_code':[35,37,12,18,10,4,22,26,7,30,24,6,2,1,20,29,32,38,31,23,27,14,17,15,13,21,34,3,8,11,33,36,16,97,9,5,19]}
     #print(len(state_codedict))
     sc = pd.DataFrame.from_dict(state_codedict)
 
     #print(sc)
     full= pd.merge(swsorter(li),sc,on='Province_State',how='left')
     full = full.sort_values(by='Last_Update')
-    print(full.head(20))
+    #print(full.head(20))
     col = np.array(full['state_code'],np.int64)
     full['state_code']=col
     full = full[full['Province_State'].notna()]
@@ -67,10 +86,11 @@ def flsorter():
         full['Last_Update']= full['Last_Update'].replace(fu,n)
     full = full.drop(['Country_Region'],axis=1)
     full.to_csv('data/statedata/full.csv',index=False)
-    
+    print('Latest Save Done')
     return full
 
-flsorter()
+swsorter(li)
+
 
 
 
