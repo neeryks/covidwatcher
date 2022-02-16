@@ -75,8 +75,8 @@ fig1 = px.choropleth_mapbox(full, geojson=geojson,
                       opacity=1,
                       zoom=3.45)
 
-fig1.layout.updatemenus[0].buttons[0].args[1]['frame']['duration'] = 60
-fig1.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = 5
+#fig1.layout.updatemenus[0].buttons[0].args[1]['frame']['duration'] = 60
+#fig1.layout.updatemenus[0].buttons[0].args[1]['transition']['duration'] = 5
 
 fig1.update_geos(fitbounds="locations", visible=False)
 fig1.show()
