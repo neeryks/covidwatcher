@@ -89,7 +89,7 @@ def flsorter():
     print('Latest Save Done')
     return full
 
-swsorter(li)
+
 
 
 
