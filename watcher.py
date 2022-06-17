@@ -9,7 +9,7 @@ from plotly.subplots import make_subplots as ms
 import ujson as json
 from statesorter import flsorter
 from multiprocessing import process
-from raceplotly.plots import barplot
+import plotly.express as px
 
 ### Starting ###
 class dataframes():
@@ -82,7 +82,7 @@ def coro():
     fig1.update_geos(fitbounds="locations", visible=False)
     fig1.show()
 def bp():
-    rp = barplot(full,item_column=full['Province_State'],value_column=full['Confirmed'],time_column=full['Last_Update'])
+    rp = px.bar(full,full['Province_State'],full['Confirmed'],full['Last_Update'])
     rp.plot(item_label="Confirmed Cases Covid-19 India",value_label="Population",frame_duration=600)
 
 bp()
